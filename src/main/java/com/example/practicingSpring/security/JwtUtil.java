@@ -3,6 +3,7 @@ package com.example.practicingSpring.security;
 import java.security.Key;
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.JwtException;
@@ -12,7 +13,8 @@ import io.jsonwebtoken.security.Keys;
 
 @Component
 public class JwtUtil {
-    private final String secret = "supersecretkeysupersecretkey123456"; // must be 32+ chars
+    @Value("${secret.key}")
+    private String secret; // must be 32+ chars
     private final long expiration = 1000 * 60 * 60; // 1 hour
 
     private Key getSigningKey() {
